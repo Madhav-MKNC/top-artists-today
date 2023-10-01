@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Top Artist on youtube Today</title>
+  <style>
+            body {
+              color: white;
+              font-color: white;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: blue;
+            color: white;
+            padding: 20px;
+        }
+
+        pre {
+            margin: 20px;
+            padding: 20px;
+            background-color: black;
+            border: 1px solid #ddd;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+  </style>
+</head>
+
+<body>
+  <h1>Top artist on Youtube today</h1>
+  <button class="refresh-button" onclick="refreshPage()">Refresh</button>
+    
+    <pre>{{ content }}</pre>
+
+  <script>
+        function refreshPage() {
+            window.location.href = '/refresh';
+        }
+    </script>
+
+</body>
+
+</html>
