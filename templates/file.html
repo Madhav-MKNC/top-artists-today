@@ -1,49 +1,65 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Top Artist on youtube Today</title>
-  <style>
-            body {
-              color: white;
-              font-color: white;
-            font-family: Arial, sans-serif;
-            background-color: black;
-            margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            text-align: center;
-            background-color: blue;
-            color: white;
-            padding: 20px;
-        }
-
-        pre {
-            margin: 20px;
-            padding: 20px;
-            background-color: black;
-            border: 1px solid #ddd;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
-        }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Artists on YouTube Today</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
-  <h1>Top artist on Youtube today</h1>
-  <button class="refresh-button" onclick="refreshPage()">Refresh</button>
-    
-    <pre>{{ content }}</pre>
+    <header>
+        <h1>Top Artists on YouTube Today</h1>
+        <button class="refresh-button" onclick="refreshPage()">Update</button>
 
-  <script>
-        function refreshPage() {
-            window.location.href = '/refresh';
-        }
-    </script>
+        <!-- flash messages -->
+        {% if message %}
+        <p class="error">{{ message }}</p>
+        {% endif %}
+              
+    </header>
+    
+    <main>
+        <pre id="content">{{ content }}</pre>
+    </main>
+
+<script>
+    function refreshPage() {
+        // Display a "Refreshing..." message
+        const refreshingMessage = document.createElement('div');
+        refreshingMessage.textContent = 'Updating...';
+        refreshingMessage.style.position = 'fixed';
+        refreshingMessage.style.top = '50%';
+        refreshingMessage.style.left = '50%';
+        refreshingMessage.style.transform = 'translate(-50%, -50%)';
+        refreshingMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+        refreshingMessage.style.color = 'white';
+        refreshingMessage.style.padding = '20px';
+        refreshingMessage.style.borderRadius = '5px';
+        document.body.appendChild(refreshingMessage);
+
+        // Send a GET request to the /refresh route
+        fetch('/refresh')
+            .then(response => {
+                if (response.ok) {
+                    // If the request was successful, hide the message
+                    refreshingMessage.style.display = 'none';
+                    return response.text();
+                } else {
+                    // If there was an error, display an error message
+                    refreshingMessage.textContent = 'Error refreshing the page.';
+                    refreshingMessage.style.backgroundColor = 'red';
+                    refreshingMessage.style.textAlign = 'center';
+                }
+            })
+            .then(data => {
+                // Update the content with the response data if needed
+                document.getElementById('content').textContent = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
 
 </body>
-
 </html>

@@ -1,0 +1,43 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #007BFF;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+button.refresh-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+button.refresh-button:hover {
+    background-color: #0056b3;
+}
+
+main {
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
