@@ -11,6 +11,46 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
 
+# beautify the numbers (1333333 => 1,333,333)
+def bootyfy(num):
+  if len(str(num)) < 4:
+    return num
+  
+  rnum = str(num)[::-1]
+  ret = ""
+  while True:
+    if len(rnum) < 4:
+      ret += rnum
+      break
+    ret += rnum[0:3] + ","
+    rnum = rnum[3:]
+  
+  return ret[::-1]
+
+
+# get current daily average views on the artist
+def current_daily_average(artist_url):
+    response = requests.get(artist_url)
+
+    try:
+      soup = BeautifulSoup(response.text, 'html.parser')
+      current_daily_avg_td = soup.find('td')
+      # current_daily_avg_td = soup.find('td', text="Current daily avg:")
+
+      if current_daily_avg_td:
+        value = current_daily_avg_td.find_next('td').find_next('td').find_next(
+            'td').text
+        print('loading')
+        return int(float(value.replace(',', '_')))
+    except Exception as e:
+      print("[error]", artist_url, "=", str(e))
+
+    # failed to fetch page
+    print("[error]", artist_url)
+    return 0
+
+
+# main
 def main():
   base_url = "https://kworb.net/youtube/"
 
@@ -29,27 +69,6 @@ def main():
   top_artists_urls = [urljoin(base_url, link['href']) for link in artist_links]
   print("[+] Total top artists:", len(top_artists_urls))
 
-  # get currect daily average views of the artist
-  def current_daily_average(artist_url):
-    response = requests.get(artist_url)
-
-    try:
-      soup = BeautifulSoup(response.text, 'html.parser')
-      current_daily_avg_td = soup.find('td')
-      # current_daily_avg_td = soup.find('td', text="Current daily avg:")
-
-      if current_daily_avg_td:
-        value = current_daily_avg_td.find_next('td').find_next('td').find_next(
-            'td').text
-        print('loading')
-        return float(value.replace(',', '_'))
-    except Exception as e:
-      print("[error]", artist_url, "=", str(e))
-
-    # failed to fetch page
-    print("[error]", artist_url)
-    return 0
-
   # main
   stats = {}
 
@@ -63,13 +82,13 @@ def main():
   sorted_stats = dict(
       sorted(stats.items(), key=lambda item: item[1], reverse=True))
 
-  # persist data
+  # persist 
   with open('stats.txt', 'w', encoding='utf-8') as file:
     file.write(json.dumps(sorted_stats))
 
   rankings = ""
   for rank, artist in enumerate(sorted_stats):
-    x = f"[{rank+1}] {sorted_stats[artist]} : {artist.split('/')[-1].split('.')[0]}"
+    x = f"{rank+1} : {bootyfy(int(float(sorted_stats[artist])))} : {artist.split('/')[-1].split('.')[0]} : {artist}"
     print(x)
     rankings += x + "\n"
 
