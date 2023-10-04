@@ -45,9 +45,11 @@ def keep_alive():
   global previous_ping
 
   current_ping = time()
-  if current_ping - previous_ping > 2000:  # interval of 2000 seconds (approximately half an hour)
+  print("[?]", (current_ping - previous_ping) / 60, "minutes")
+
+  if current_ping - previous_ping > 2000:  # 2000s
     Thread(target=main).start()
-    print("[*] Updating...")
+    print(f"[*] Updating after {(current_ping-previous_ping)/60} minutes.")
     set_previous(current_ping)
 
   print("[+] ping by uptimerobot")
