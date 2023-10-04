@@ -10,7 +10,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #000;
-    color: white;
+    color: #6eff67;
     margin: 0;
     padding: 0;
 }
@@ -76,13 +76,14 @@ ul#content-list li {
 
 ul#content-list li a {
     text-decoration: none;
-    color: #6eff67; /* Light Green */
+    color: #ff6ac1; /* Light Green */
     font-weight: bold;
     transition: color 0.3s ease-in-out;
 }
 
 ul#content-list li a:hover {
-    color: #4bea4a; /* Darker Light Green */
+    color: white; /* Darker Light Green */
+    /* box-shadow: 0px 0px 5px rgba(214, 73, 107, 0.9); */
 }
 
 pre {
