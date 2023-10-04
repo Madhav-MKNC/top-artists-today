@@ -1,4 +1,12 @@
 /* style.css */
+
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -22,6 +30,7 @@ button.refresh-button {
     font-size: 16px;
     margin: 10px;
     border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
 }
 
 button.refresh-button:hover {
@@ -35,6 +44,25 @@ main {
     border: 1px solid #ddd;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
+}
+
+ul#content-list {
+    list-style: none;
+    padding: 0;
+}
+
+ul#content-list li {
+    margin: 10px 0;
+}
+
+ul#content-list li a {
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+}
+
+ul#content-list li a:hover {
+    text-decoration: underline;
 }
 
 pre {
