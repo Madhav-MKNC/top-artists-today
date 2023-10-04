@@ -45,13 +45,19 @@ def keep_alive():
   global previous_ping
 
   current_ping = time()
-  if current_ping - previous_ping > 2000:  # interval of 2000 seconds (approximately half an hour)
-    Thread(target=main).start()
-    print("[*] Updating...")
-    set_previous(current_ping)
+  print("[?] Ping after:", (current_ping - previous_ping) / 60, "minutes")
 
-  print("[+] ping by uptimerobot")
-  return jsonify({"Status": "Updating..."})
+  if current_ping - previous_ping > 2000:  # 2000s
+    Thread(target=main).start()
+    print(f"[*] Updating after {(current_ping-previous_ping)/60} minutes.")
+
+    # update 'previous_ping'
+    previous_ping = current_ping
+    set_previous(previous_ping)
+    
+    return jsonify({"Status": "Updating..."})
+
+  return jsonify({"Status": "Updated"})
 
 
 if __name__ == "__main__":
