@@ -50,7 +50,11 @@ def keep_alive():
   if current_ping - previous_ping > 2000:  # 2000s
     Thread(target=main).start()
     print(f"[*] Updating after {(current_ping-previous_ping)/60} minutes.")
-    set_previous(current_ping)
+
+    # update 'previous_ping'
+    previous_ping = current_ping
+    set_previous(previous_ping)
+    
     return jsonify({"Status": "Updating..."})
 
   return jsonify({"Status": "Updated"})
