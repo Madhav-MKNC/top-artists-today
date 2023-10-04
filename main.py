@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from utils import main
+from utils import main, get_previous, set_previous
 
 from time import time
 
@@ -10,7 +10,9 @@ from threading import Thread
 Flask App for hosting API
 """
 app = Flask(__name__)
-previous_ping = time()
+
+# previous ping timestamp
+previous_ping = get_previous()
 
 
 @app.route("/")
@@ -25,10 +27,11 @@ def home():
 @app.route("/refresh")
 def keep_alive():
   global previous_ping
-  if time(
-  ) - previous_ping > 2000:  # interval of 2000 seconds (approximately half an hour)
+  current_ping = time()
+  if current_ping - previous_ping > 2000:  # interval of 2000 seconds (approximately half an hour)
     Thread(target=main).start()
     print("[*] Updating...")
+    set_previous(current_ping)
   print("[+] ping by uptimerobot")
   return jsonify({"Status": "Updating..."})
 
