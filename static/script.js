@@ -1,7 +1,7 @@
 function refreshPage() {
     // Display a "Refreshing..." message
     const refreshingMessage = document.createElement('div');
-    refreshingMessage.textContent = 'Updating...';
+    refreshingMessage.textContent = 'Refreshing...'; // Set an initial message
     refreshingMessage.style.position = 'fixed';
     refreshingMessage.style.top = '50%';
     refreshingMessage.style.left = '50%';
@@ -34,4 +34,3 @@ function refreshPage() {
             console.error('Error:', error);
         });
 }
-
