@@ -1,7 +1,16 @@
 /* style.css */
+
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #1a1a1a;
+    color: #fff;
     margin: 0;
     padding: 0;
 }
@@ -11,10 +20,11 @@ header {
     color: white;
     text-align: center;
     padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 button.refresh-button {
-    background-color: #007BFF;
+    background-color: #0056b3;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -22,19 +32,47 @@ button.refresh-button {
     font-size: 16px;
     margin: 10px;
     border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
 }
 
 button.refresh-button:hover {
-    background-color: #0056b3;
+    background-color: #007BFF;
 }
 
 main {
     margin: 20px;
     padding: 20px;
-    background-color: white;
-    border: 1px solid #ddd;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    background-color: #333;
+    border: 1px solid #555;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
     border-radius: 5px;
+}
+
+ul#content-list {
+    list-style: none;
+    padding: 0;
+}
+
+ul#content-list li {
+    margin: 10px 0;
+    background-color: #444;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul#content-list li a {
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+ul#content-list li a:hover {
+    color: #0056b3;
 }
 
 pre {
