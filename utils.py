@@ -118,4 +118,8 @@ def get_previous():
   with open(PREVIOUS_FILE_PATH, 'r') as file:
     ts = file.read().strip()
 
+  if not ts:
+    ts = time()
+    set_previous()
+
   return float(ts)
