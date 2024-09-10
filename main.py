@@ -19,7 +19,7 @@ previous_ping = get_previous()
 def home():
   print("[+] OK")
 
-  with open("rankings.txt", 'r') as file:
+  with open("rankings.txt", 'r', encoding='utf-8') as file:
     file_content = file.read().split('\n')
 
   artists = []
@@ -47,7 +47,7 @@ def keep_alive():
   current_ping = time()
   print("[?] Ping after:", (current_ping - previous_ping) / 60, "minutes")
 
-  if current_ping - previous_ping > 2000:  # 2000s
+  if current_ping - previous_ping > 50:  # 50s
     Thread(target=main).start()
     print(f"[*] Updating after {(current_ping-previous_ping)/60} minutes.")
 
