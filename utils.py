@@ -95,8 +95,7 @@ def main():
 
     rankings = ""
     for rank, artist in enumerate(sorted_stats):
-        x = f"{rank+1} : {bootyfy(int(float(sorted_stats[artist])))} : {
-            artist.split('/')[-1].split('.')[0]} : {artist}"
+        x = f"{rank+1} : {bootyfy(int(float(sorted_stats[artist])))} : {artist.split('/')[-1].split('.')[0]} : {artist}"
         print(x)
         rankings += x + "\n"
 
