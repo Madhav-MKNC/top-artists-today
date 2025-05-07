@@ -60,5 +60,9 @@ def keep_alive():
   return jsonify({"Status": "Updated"})
 
 
-if __name__ == "__main__":
+def main_entry_point():
   app.run(host="0.0.0.0", port=5000, debug=True)
+
+
+if __name__ == "__main__":
+  main_entry_point()
