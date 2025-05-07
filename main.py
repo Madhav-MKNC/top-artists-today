@@ -4,7 +4,9 @@ from utils import main, get_previous, set_previous
 
 from time import time
 
-from flask import Flask, render_template, jsonify
+from flask import Flask
+from flask import render_template
+from flask import jsonify
 from threading import Thread  
 """
 Flask App for hosting API
