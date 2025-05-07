@@ -66,8 +66,7 @@ def main():
 
     soup = BeautifulSoup(response.text, 'html.parser')
     tbody = soup.find('tbody')
-    artist_links = tbody.find_all('a',
-                                  href=lambda x: x and x.startswith('artist/'))
+    artist_links = tbody.find_all('a', href=lambda x: x and x.startswith('artist/'))
 
     top_artists_urls = [urljoin(base_url, link['href'])
                         for link in artist_links]
@@ -129,6 +128,6 @@ def get_previous():
 
     if not ts:
         ts = time()
-        set_previous()
+        set_previous(ts)
 
     return float(ts)
